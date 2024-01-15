@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('created_at');
             $table->string('shipping_address', 255);
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('order_status_id')->references('id')->on('order_statuses');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('order_status_id')->references('id')->on('order_statuses')->onDelete('restrict');
         });
     }
 

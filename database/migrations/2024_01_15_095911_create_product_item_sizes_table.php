@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('qty');
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('product_items');
-            $table->foreign('size_id')->references('id')->on('sizes');
+            $table->foreign('product_id')->references('id')->on('product_items')->onDelete('cascade');
+            $table->foreign('size_id')->references('id')->on('sizes')->onDelete('restrict');
         });
     }
 

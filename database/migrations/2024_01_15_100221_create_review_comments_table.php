@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text('comment');
             $table->timestamps();
 
-            $table->foreign('review_id')->references('id')->on('reviews');
-            $table->foreign('review_comment_id')->references('id')->on('review_comments');
+            $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');
+            $table->foreign('review_comment_id')->references('id')->on('review_comments')->onDelete('cascade');
         });
     }
 
