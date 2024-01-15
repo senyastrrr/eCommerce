@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Billboard extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'image', 'content', 'isActual',
+    ];
 }

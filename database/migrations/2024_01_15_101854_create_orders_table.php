@@ -9,15 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up() : void
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedInteger('order_status_id');
+            $table->unsignedBigInteger('order_status_id');
             $table->timestamp('created_at');
             $table->string('shipping_address', 255);
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('order_status_id')->references('id')->on('order_statuses');

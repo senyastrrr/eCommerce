@@ -9,18 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up() : void
     {
         Schema::create('order_lines', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('order_id');
+            $table->integer('qty');
+            $table->decimal('price');
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('product_item_sizes');
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('order_lines');
     }

@@ -9,12 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up() : void
     {
         Schema::create('product_configuration', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('product_id');
-            $table->unsignedInteger('attribute_id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('attribute_id');
             $table->string('value', 255);
             $table->timestamps();
 

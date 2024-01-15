@@ -9,12 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-    {
+    public function up() : void
+    { 
         Schema::create('review_comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('review_id');
-            $table->unsignedInteger('review_comment_id')->nullable();
+            $table->unsignedBigInteger('review_id');
+            $table->unsignedBigInteger('review_comment_id')->nullable();
             $table->text('comment');
             $table->timestamps();
 

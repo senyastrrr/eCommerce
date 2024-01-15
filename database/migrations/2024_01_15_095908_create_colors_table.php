@@ -9,19 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up() : void
     {
-        Schema::create('sizes', function (Blueprint $table) {
+        Schema::create('colors', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255);
+            $table->string('hex', 7);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('sizes');
+        Schema::dropIfExists('colors');
     }
 };

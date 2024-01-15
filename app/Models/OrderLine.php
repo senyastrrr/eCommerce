@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderLine extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'product_id', 'order_id', 'qty', 'price',
+    ];
 }

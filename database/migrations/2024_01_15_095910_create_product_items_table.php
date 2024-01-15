@@ -9,12 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('product_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('product_id');
-            $table->unsignedInteger('color_id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('color_id');
             $table->string('SKU', 255);
             $table->string('image', 255);
             $table->timestamps();
@@ -24,7 +24,7 @@ return new class extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('product_items');
     }

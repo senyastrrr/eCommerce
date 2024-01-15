@@ -9,18 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up() : void
     {
         Schema::create('product_item_sizes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('size_id');
+            $table->integer('qty');
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('product_items');
+            $table->foreign('size_id')->references('id')->on('sizes');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('product_item_sizes');
     }
