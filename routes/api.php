@@ -37,7 +37,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::get('/user/{id}', [UsersController::class, 'getUserById']);
+Route::apiResource('users', UsersController::class);
 Route::apiResource('billboards', BillboardsController::class);
 Route::apiResource('categories', CategoriesController::class);
 Route::apiResource('colors', ColorsController::class);
