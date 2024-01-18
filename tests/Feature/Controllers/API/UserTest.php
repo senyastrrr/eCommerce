@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Database\Factories\RoleFactory;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class UserTest extends TestCase
 {
