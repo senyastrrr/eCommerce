@@ -1,7 +1,4 @@
-import Navbar from '@/Components/Navbar/Navbar';
 import { Link, Head } from '@inertiajs/react';
-import { Provider } from 'react-redux'
-import store from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
@@ -9,9 +6,6 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
         <BrowserRouter>
             <Head title="Welcome" />
-            <Provider store={store}> 
-                <Navbar></Navbar>
-                </Provider>
 
                 <div className="max-w-7xl mx-auto p-6 lg:p-8">
                     <div className="flex justify-center">
