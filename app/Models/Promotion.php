@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Promotion extends Model
 {
+    use HasFactory;
+    
     protected $fillable = [
         'name', 'description', 'discount_rate', 'start_date', 'end_date',
     ];
