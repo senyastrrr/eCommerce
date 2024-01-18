@@ -27,9 +27,7 @@ class ReviewCommentFactory extends Factory
             'review_id' => function () {
                 return \App\Models\Review::factory()->create()->id;
             },
-            'review_comment_id' => function () {
-                return \App\Models\ReviewComment::factory()->create()->id;
-            },
+            'review_comment_id' => null,
             'comment' => $this->faker->paragraph,
         ];
     }

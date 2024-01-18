@@ -30,6 +30,7 @@ class ShoppingCartItemFactory extends Factory
             'product_id' => function () {
                 return \App\Models\ProductItemSize::factory()->create()->product_id;
             },
+            
             'qty' => $this->faker->numberBetween(1, 10),
         ];
     }
