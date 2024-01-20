@@ -23,10 +23,10 @@ class ReviewTest extends TestCase
     public function test_create_review()
     {
         $response = $this->postJson('/api/reviews', [
-            'user_id' => 1,
-            'product_id' => 1,
+            'user_id' => $this->review->user_id,
+            'product_id' => $this->review->product_id,
             'value' => 5,
-            'comment' => $this->faker->sentence,
+            'comment' => "smth",
         ]);
 
         $response->assertStatus(201);

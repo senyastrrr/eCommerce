@@ -25,7 +25,7 @@ class UserTest extends TestCase
     public function test_create_user()
     {
         $response = $this->postJson('/api/users', [
-            'full_name' => $this->user->full_name,
+            'name' => $this->user->name,
             'email' => "example@mail.com",
             'password' => 'password',
             'role_id' => $this->user->role_id,
@@ -43,13 +43,13 @@ class UserTest extends TestCase
     public function test_update_user()
     {
         $response = $this->putJson("/api/users/{$this->user->id}", [
-            'full_name' => "Grisha",
+            'name' => "Grisha",
         ]);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('users', [
             'id' => $this->user->id,
-            'full_name' => "Grisha",
+            'name' => "Grisha",
         ]);
     }
 

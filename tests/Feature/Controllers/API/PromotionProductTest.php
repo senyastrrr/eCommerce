@@ -25,7 +25,7 @@ class PromotionProductTest extends TestCase
     public function test_create_promotion_product()
     {
         $response = $this->postJson('/api/promotion-products', [
-            'promotion_id' => 1,
+            'promotion_id' => $this->promotionProduct->promotion_id,
             'product_id' => $this->product1->id,
         ]);
 

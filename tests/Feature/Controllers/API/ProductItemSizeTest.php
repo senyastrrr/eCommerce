@@ -23,8 +23,8 @@ class ProductItemSizeTest extends TestCase
     public function test_create_product_item_size()
     {
         $response = $this->postJson('/api/product-item-sizes', [
-            'product_id' => 1,
-            'size_id' => 1,
+            'product_id' => $this->productItemSize->product_id,
+            'size_id' => $this->productItemSize->size_id,
             'qty' => 10,
         ]);
 

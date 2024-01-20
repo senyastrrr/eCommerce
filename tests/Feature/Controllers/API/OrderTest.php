@@ -23,8 +23,8 @@ class OrderTest extends TestCase
     public function test_create_order()
     {
         $response = $this->postJson('/api/orders', [
-            'user_id' => 1,
-            'order_status_id' => 1,
+            'user_id' => $this->order->user_id,
+            'order_status_id' => $this->order->order_status_id,
             'created_at' => now(),
             'shipping_address' => $this->faker->address,
         ]);

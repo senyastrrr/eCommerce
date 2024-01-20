@@ -24,8 +24,8 @@ class ProductConfigurationTest extends TestCase
     public function test_create_product_configuration()
     {
         $response = $this->postJson('/api/product-configurations', [
-            'product_id' => 1,
-            'attribute_id' => 1,
+            'product_id' => $this->productConfiguration->product_id,
+            'attribute_id' => $this->productConfiguration->attribute_id,
             'value' => 'New Configuration',
         ]);
 

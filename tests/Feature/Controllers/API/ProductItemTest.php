@@ -24,8 +24,8 @@ class ProductItemTest extends TestCase
     public function test_create_product_item()
     {
         $response = $this->postJson('/api/product-items', [
-            'product_id' => 1,
-            'color_id' => 1,
+            'product_id' => $this->productItem->product_id,
+            'color_id' => $this->productItem->color_id,
             'SKU' => 'ABC123',
             'image' => 'path/to/image.jpg',
         ]);
