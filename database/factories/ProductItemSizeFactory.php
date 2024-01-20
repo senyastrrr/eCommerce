@@ -25,7 +25,7 @@ class ProductItemSizeFactory extends Factory
     {
         return [
             'product_id' => function () {
-                return \App\Models\ProductItem::factory()->create()->product_id;
+                return \App\Models\ProductItem::factory()->create()->id;
             },
             'size_id' => function () {
                 return \App\Models\Size::factory()->create()->id;

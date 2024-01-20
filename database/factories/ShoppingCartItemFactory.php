@@ -28,7 +28,7 @@ class ShoppingCartItemFactory extends Factory
                 return \App\Models\ShoppingCart::factory()->create()->id;
             },
             'product_id' => function () {
-                return \App\Models\ProductItemSize::factory()->create()->product_id;
+                return \App\Models\ProductItemSize::factory()->create()->id;
             },
             
             'qty' => $this->faker->numberBetween(1, 10),
