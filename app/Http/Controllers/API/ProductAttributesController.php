@@ -9,29 +9,33 @@ class ProductAttributesController extends Controller
 {
     public function index()
     {
-        return response()->json(ProductAttribute::all());
+        return ProductAttribute::all();
     }
 
     public function store(Request $request)
     {
-        $ProductAttribute = ProductAttribute::create($request->all());
-        return response()->json($ProductAttribute, 201);
+        $productAttribute = ProductAttribute::create($request->all());
+        return response()->json($productAttribute, 201);
     }
 
-    public function show(ProductAttribute $ProductAttribute)
+    public function show($id)
     {
-        return response()->json($ProductAttribute);
+        return ProductAttribute::findOrFail($id);
     }
 
-    public function update(Request $request, ProductAttribute $ProductAttribute)
+    public function update(Request $request, $id)
     {
-        $ProductAttribute->update($request->all());
-        return response()->json($ProductAttribute, 200);
+        $productAttribute = ProductAttribute::findOrFail($id);
+        $productAttribute->update($request->all());
+
+        return $productAttribute;
     }
 
-    public function destroy(ProductAttribute $ProductAttribute)
+    public function destroy($id)
     {
-        $ProductAttribute->delete();
+        $productAttribute = ProductAttribute::findOrFail($id);
+        $productAttribute->delete();
+
         return response()->json(null, 204);
     }
 }

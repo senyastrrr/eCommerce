@@ -9,29 +9,34 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        return response()->json(Category::all());
+        return Category::all();
     }
 
     public function store(Request $request)
     {
-        $Category = Category::create($request->all());
-        return response()->json($Category, 201);
+        $category = Category::create($request->all());
+        return response()->json($category, 201);
     }
 
-    public function show(Category $Category)
+    public function show($id)
     {
-        return response()->json($Category);
+        return Category::findOrFail($id);
     }
 
-    public function update(Request $request, Category $Category)
+    public function update(Request $request, $id)
     {
-        $Category->update($request->all());
-        return response()->json($Category, 200);
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+
+        return $category;
     }
 
-    public function destroy(Category $Category)
+    public function destroy($id)
     {
-        $Category->delete();
+        $category = Category::findOrFail($id);
+        $category->delete();
+
         return response()->json(null, 204);
     }
 }
+

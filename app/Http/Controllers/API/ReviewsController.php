@@ -9,29 +9,34 @@ class ReviewsController extends Controller
 {
     public function index()
     {
-        return response()->json(Review::all());
+        return Review::all();
     }
 
     public function store(Request $request)
     {
-        $Review = Review::create($request->all());
-        return response()->json($Review, 201);
+        $review = Review::create($request->all());
+        return response()->json($review, 201);
     }
 
-    public function show(Review $Review)
+    public function show($id)
     {
-        return response()->json($Review);
+        return Review::findOrFail($id);
     }
 
-    public function update(Request $request, Review $Review)
+    public function update(Request $request, $id)
     {
-        $Review->update($request->all());
-        return response()->json($Review, 200);
+        $review = Review::findOrFail($id);
+        $review->update($request->all());
+
+        return $review;
     }
 
-    public function destroy(Review $Review)
+    public function destroy($id)
     {
-        $Review->delete();
+        $review = Review::findOrFail($id);
+        $review->delete();
+
         return response()->json(null, 204);
     }
 }
+

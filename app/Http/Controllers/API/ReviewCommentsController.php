@@ -9,29 +9,34 @@ class ReviewCommentsController extends Controller
 {
     public function index()
     {
-        return response()->json(ReviewComment::all());
+        return ReviewComment::all();
     }
 
     public function store(Request $request)
     {
-        $ReviewComment = ReviewComment::create($request->all());
-        return response()->json($ReviewComment, 201);
+        $reviewComment = ReviewComment::create($request->all());
+        return response()->json($reviewComment, 201);
     }
 
-    public function show(ReviewComment $ReviewComment)
+    public function show($id)
     {
-        return response()->json($ReviewComment);
+        return ReviewComment::findOrFail($id);
     }
 
-    public function update(Request $request, ReviewComment $ReviewComment)
+    public function update(Request $request, $id)
     {
-        $ReviewComment->update($request->all());
-        return response()->json($ReviewComment, 200);
+        $reviewComment = ReviewComment::findOrFail($id);
+        $reviewComment->update($request->all());
+
+        return $reviewComment;
     }
 
-    public function destroy(ReviewComment $ReviewComment)
+    public function destroy($id)
     {
-        $ReviewComment->delete();
+        $reviewComment = ReviewComment::findOrFail($id);
+        $reviewComment->delete();
+
         return response()->json(null, 204);
     }
 }
+

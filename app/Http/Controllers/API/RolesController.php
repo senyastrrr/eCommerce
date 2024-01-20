@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
@@ -18,20 +19,24 @@ class RolesController extends Controller
         return response()->json($role, 201);
     }
 
-    public function show(Role $role)
+    public function show($id)
     {
-        return response()->json($role);
+        return response()->json(Role::findOrFail($id));
     }
 
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id)
     {
+        $role = Role::findOrFail($id);
         $role->update($request->all());
+
         return response()->json($role, 200);
     }
 
-    public function destroy(Role $role)
+    public function destroy($id)
     {
+        $role = Role::findOrFail($id);
         $role->delete();
+
         return response()->json(null, 204);
     }
 }

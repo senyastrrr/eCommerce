@@ -9,29 +9,34 @@ class ColorsController extends Controller
 {
     public function index()
     {
-        return response()->json(Color::all());
+        return Color::all();
     }
 
     public function store(Request $request)
     {
-        $Color = Color::create($request->all());
-        return response()->json($Color, 201);
+        $color = Color::create($request->all());
+        return response()->json($color, 201);
     }
 
-    public function show(Color $Color)
+    public function show($id)
     {
-        return response()->json($Color);
+        return Color::findOrFail($id);
     }
 
-    public function update(Request $request, Color $Color)
+    public function update(Request $request, $id)
     {
-        $Color->update($request->all());
-        return response()->json($Color, 200);
+        $color = Color::findOrFail($id);
+        $color->update($request->all());
+
+        return $color;
     }
 
-    public function destroy(Color $Color)
+    public function destroy($id)
     {
-        $Color->delete();
+        $color = Color::findOrFail($id);
+        $color->delete();
+
         return response()->json(null, 204);
     }
 }
+

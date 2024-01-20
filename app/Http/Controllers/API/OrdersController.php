@@ -9,29 +9,34 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        return response()->json(Order::all());
+        return Order::all();
     }
 
     public function store(Request $request)
     {
-        $Order = Order::create($request->all());
-        return response()->json($Order, 201);
+        $order = Order::create($request->all());
+        return response()->json($order, 201);
     }
 
-    public function show(Order $Order)
+    public function show($id)
     {
-        return response()->json($Order);
+        return Order::findOrFail($id);
     }
 
-    public function update(Request $request, Order $Order)
+    public function update(Request $request, $id)
     {
-        $Order->update($request->all());
-        return response()->json($Order, 200);
+        $order = Order::findOrFail($id);
+        $order->update($request->all());
+
+        return $order;
     }
 
-    public function destroy(Order $Order)
+    public function destroy($id)
     {
-        $Order->delete();
+        $order = Order::findOrFail($id);
+        $order->delete();
+
         return response()->json(null, 204);
     }
 }
+

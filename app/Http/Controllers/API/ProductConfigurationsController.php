@@ -9,29 +9,34 @@ class ProductConfigurationsController extends Controller
 {
     public function index()
     {
-        return response()->json(ProductConfiguration::all());
+        return ProductConfiguration::all();
     }
 
     public function store(Request $request)
     {
-        $ProductConfiguration = ProductConfiguration::create($request->all());
-        return response()->json($ProductConfiguration, 201);
+        $productConfiguration = ProductConfiguration::create($request->all());
+        return response()->json($productConfiguration, 201);
     }
 
-    public function show(ProductConfiguration $ProductConfiguration)
+    public function show($id)
     {
-        return response()->json($ProductConfiguration);
+        return ProductConfiguration::findOrFail($id);
     }
 
-    public function update(Request $request, ProductConfiguration $ProductConfiguration)
+    public function update(Request $request, $id)
     {
-        $ProductConfiguration->update($request->all());
-        return response()->json($ProductConfiguration, 200);
+        $productConfiguration = ProductConfiguration::findOrFail($id);
+        $productConfiguration->update($request->all());
+
+        return $productConfiguration;
     }
 
-    public function destroy(ProductConfiguration $ProductConfiguration)
+    public function destroy($id)
     {
-        $ProductConfiguration->delete();
+        $productConfiguration = ProductConfiguration::findOrFail($id);
+        $productConfiguration->delete();
+
         return response()->json(null, 204);
     }
 }
+

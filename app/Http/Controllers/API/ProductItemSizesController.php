@@ -9,29 +9,34 @@ class ProductItemSizesController extends Controller
 {
     public function index()
     {
-        return response()->json(ProductItemSize::all());
+        return ProductItemSize::all();
     }
 
     public function store(Request $request)
     {
-        $ProductItemSize = ProductItemSize::create($request->all());
-        return response()->json($ProductItemSize, 201);
+        $productItemSize = ProductItemSize::create($request->all());
+        return response()->json($productItemSize, 201);
     }
 
-    public function show(ProductItemSize $ProductItemSize)
+    public function show($id)
     {
-        return response()->json($ProductItemSize);
+        return ProductItemSize::findOrFail($id);
     }
 
-    public function update(Request $request, ProductItemSize $ProductItemSize)
+    public function update(Request $request, $id)
     {
-        $ProductItemSize->update($request->all());
-        return response()->json($ProductItemSize, 200);
+        $productItemSize = ProductItemSize::findOrFail($id);
+        $productItemSize->update($request->all());
+
+        return $productItemSize;
     }
 
-    public function destroy(ProductItemSize $ProductItemSize)
+    public function destroy($id)
     {
-        $ProductItemSize->delete();
+        $productItemSize = ProductItemSize::findOrFail($id);
+        $productItemSize->delete();
+
         return response()->json(null, 204);
     }
 }
+

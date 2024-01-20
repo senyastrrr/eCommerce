@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
@@ -9,29 +10,33 @@ class SizesController extends Controller
 {
     public function index()
     {
-        return response()->json(Size::all());
+        return Size::all();
     }
 
     public function store(Request $request)
     {
-        $Size = Size::create($request->all());
-        return response()->json($Size, 201);
+        $size = Size::create($request->all());
+        return response()->json($size, 201);
     }
 
-    public function show(Size $Size)
+    public function show($id)
     {
-        return response()->json($Size);
+        return Size::findOrFail($id);
     }
 
-    public function update(Request $request, Size $Size)
+    public function update(Request $request, $id)
     {
-        $Size->update($request->all());
-        return response()->json($Size, 200);
+        $size = Size::findOrFail($id);
+        $size->update($request->all());
+
+        return $size;
     }
 
-    public function destroy(Size $Size)
+    public function destroy($id)
     {
-        $Size->delete();
+        $size = Size::findOrFail($id);
+        $size->delete();
+
         return response()->json(null, 204);
     }
 }

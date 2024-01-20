@@ -9,29 +9,34 @@ class OrderLinesController extends Controller
 {
     public function index()
     {
-        return response()->json(OrderLine::all());
+        return OrderLine::all();
     }
 
     public function store(Request $request)
     {
-        $OrderLine = OrderLine::create($request->all());
-        return response()->json($OrderLine, 201);
+        $orderLine = OrderLine::create($request->all());
+        return response()->json($orderLine, 201);
     }
 
-    public function show(OrderLine $OrderLine)
+    public function show($id)
     {
-        return response()->json($OrderLine);
+        return OrderLine::findOrFail($id);
     }
 
-    public function update(Request $request, OrderLine $OrderLine)
+    public function update(Request $request, $id)
     {
-        $OrderLine->update($request->all());
-        return response()->json($OrderLine, 200);
+        $orderLine = OrderLine::findOrFail($id);
+        $orderLine->update($request->all());
+
+        return $orderLine;
     }
 
-    public function destroy(OrderLine $OrderLine)
+    public function destroy($id)
     {
-        $OrderLine->delete();
+        $orderLine = OrderLine::findOrFail($id);
+        $orderLine->delete();
+
         return response()->json(null, 204);
     }
 }
+

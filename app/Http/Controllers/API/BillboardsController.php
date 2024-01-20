@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
@@ -9,29 +10,32 @@ class BillboardsController extends Controller
 {
     public function index()
     {
-        return response()->json(Billboard::all());
+        return Billboard::all();
     }
 
     public function store(Request $request)
     {
-        $Billboard = Billboard::create($request->all());
-        return response()->json($Billboard, 201);
+        return Billboard::create($request->all());
     }
 
-    public function show(Billboard $Billboard)
+    public function show($id)
     {
-        return response()->json($Billboard);
+        return Billboard::findOrFail($id);
     }
 
-    public function update(Request $request, Billboard $Billboard)
+    public function update(Request $request, $id)
     {
-        $Billboard->update($request->all());
-        return response()->json($Billboard, 200);
+        $billboard = Billboard::findOrFail($id);
+        $billboard->update($request->all());
+
+        return $billboard;
     }
 
-    public function destroy(Billboard $Billboard)
+    public function destroy($id)
     {
-        $Billboard->delete();
+        $billboard = Billboard::findOrFail($id);
+        $billboard->delete();
+
         return response()->json(null, 204);
     }
 }

@@ -9,29 +9,34 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        return response()->json(Product::all());
+        return Product::all();
     }
 
     public function store(Request $request)
     {
-        $Product = Product::create($request->all());
-        return response()->json($Product, 201);
+        $product = Product::create($request->all());
+        return response()->json($product, 201);
     }
 
-    public function show(Product $Product)
+    public function show($id)
     {
-        return response()->json($Product);
+        return Product::findOrFail($id);
     }
 
-    public function update(Request $request, Product $Product)
+    public function update(Request $request, $id)
     {
-        $Product->update($request->all());
-        return response()->json($Product, 200);
+        $product = Product::findOrFail($id);
+        $product->update($request->all());
+
+        return $product;
     }
 
-    public function destroy(Product $Product)
+    public function destroy($id)
     {
-        $Product->delete();
+        $product = Product::findOrFail($id);
+        $product->delete();
+
         return response()->json(null, 204);
     }
 }
+

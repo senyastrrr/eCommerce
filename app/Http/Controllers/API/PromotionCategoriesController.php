@@ -9,29 +9,34 @@ class PromotionCategoriesController extends Controller
 {
     public function index()
     {
-        return response()->json(PromotionCategory::all());
+        return PromotionCategory::all();
     }
 
     public function store(Request $request)
     {
-        $PromotionCategory = PromotionCategory::create($request->all());
-        return response()->json($PromotionCategory, 201);
+        $promotionCategory = PromotionCategory::create($request->all());
+        return response()->json($promotionCategory, 201);
     }
 
-    public function show(PromotionCategory $PromotionCategory)
+    public function show($id)
     {
-        return response()->json($PromotionCategory);
+        return PromotionCategory::findOrFail($id);
     }
 
-    public function update(Request $request, PromotionCategory $PromotionCategory)
+    public function update(Request $request, $id)
     {
-        $PromotionCategory->update($request->all());
-        return response()->json($PromotionCategory, 200);
+        $promotionCategory = PromotionCategory::findOrFail($id);
+        $promotionCategory->update($request->all());
+
+        return $promotionCategory;
     }
 
-    public function destroy(PromotionCategory $PromotionCategory)
+    public function destroy($id)
     {
-        $PromotionCategory->delete();
+        $promotionCategory = PromotionCategory::findOrFail($id);
+        $promotionCategory->delete();
+
         return response()->json(null, 204);
     }
 }
+

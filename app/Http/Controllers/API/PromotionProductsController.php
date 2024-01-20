@@ -9,29 +9,34 @@ class PromotionProductsController extends Controller
 {
     public function index()
     {
-        return response()->json(PromotionProduct::all());
+        return PromotionProduct::all();
     }
 
     public function store(Request $request)
     {
-        $PromotionProduct = PromotionProduct::create($request->all());
-        return response()->json($PromotionProduct, 201);
+        $promotionProduct = PromotionProduct::create($request->all());
+        return response()->json($promotionProduct, 201);
     }
 
-    public function show(PromotionProduct $PromotionProduct)
+    public function show($id)
     {
-        return response()->json($PromotionProduct);
+        return PromotionProduct::findOrFail($id);
     }
 
-    public function update(Request $request, PromotionProduct $PromotionProduct)
+    public function update(Request $request, $id)
     {
-        $PromotionProduct->update($request->all());
-        return response()->json($PromotionProduct, 200);
+        $promotionProduct = PromotionProduct::findOrFail($id);
+        $promotionProduct->update($request->all());
+
+        return $promotionProduct;
     }
 
-    public function destroy(PromotionProduct $PromotionProduct)
+    public function destroy($id)
     {
-        $PromotionProduct->delete();
+        $promotionProduct = PromotionProduct::findOrFail($id);
+        $promotionProduct->delete();
+
         return response()->json(null, 204);
     }
 }
+

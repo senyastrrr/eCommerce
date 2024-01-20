@@ -9,29 +9,34 @@ class ProductItemsController extends Controller
 {
     public function index()
     {
-        return response()->json(ProductItem::all());
+        return ProductItem::all();
     }
 
     public function store(Request $request)
     {
-        $ProductItem = ProductItem::create($request->all());
-        return response()->json($ProductItem, 201);
+        $productItem = ProductItem::create($request->all());
+        return response()->json($productItem, 201);
     }
 
-    public function show(ProductItem $ProductItem)
+    public function show($id)
     {
-        return response()->json($ProductItem);
+        return ProductItem::findOrFail($id);
     }
 
-    public function update(Request $request, ProductItem $ProductItem)
+    public function update(Request $request, $id)
     {
-        $ProductItem->update($request->all());
-        return response()->json($ProductItem, 200);
+        $productItem = ProductItem::findOrFail($id);
+        $productItem->update($request->all());
+
+        return $productItem;
     }
 
-    public function destroy(ProductItem $ProductItem)
+    public function destroy($id)
     {
-        $ProductItem->delete();
+        $productItem = ProductItem::findOrFail($id);
+        $productItem->delete();
+
         return response()->json(null, 204);
     }
 }
+

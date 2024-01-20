@@ -9,29 +9,34 @@ class PromotionsController extends Controller
 {
     public function index()
     {
-        return response()->json(Promotion::all());
+        return Promotion::all();
     }
 
     public function store(Request $request)
     {
-        $Promotion = Promotion::create($request->all());
-        return response()->json($Promotion, 201);
+        $promotion = Promotion::create($request->all());
+        return response()->json($promotion, 201);
     }
 
-    public function show(Promotion $Promotion)
+    public function show($id)
     {
-        return response()->json($Promotion);
+        return Promotion::findOrFail($id);
     }
 
-    public function update(Request $request, Promotion $Promotion)
+    public function update(Request $request, $id)
     {
-        $Promotion->update($request->all());
-        return response()->json($Promotion, 200);
+        $promotion = Promotion::findOrFail($id);
+        $promotion->update($request->all());
+
+        return $promotion;
     }
 
-    public function destroy(Promotion $Promotion)
+    public function destroy($id)
     {
-        $Promotion->delete();
+        $promotion = Promotion::findOrFail($id);
+        $promotion->delete();
+
         return response()->json(null, 204);
     }
 }
+

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
@@ -14,24 +15,26 @@ class ShoppingCartsController extends Controller
 
     public function store(Request $request)
     {
-        $ShoppingCart = ShoppingCart::create($request->all());
-        return response()->json($ShoppingCart, 201);
+        $shoppingCart = ShoppingCart::create($request->all());
+        return response()->json($shoppingCart, 201);
     }
 
-    public function show(ShoppingCart $ShoppingCart)
+    public function show($id)
     {
-        return response()->json($ShoppingCart);
+        return ShoppingCart::findOrFail($id);
     }
 
-    public function update(Request $request, ShoppingCart $ShoppingCart)
+    public function update(Request $request, $id)
     {
-        $ShoppingCart->update($request->all());
-        return response()->json($ShoppingCart, 200);
+        $shoppingCart = ShoppingCart::findOrFail($id);
+        $shoppingCart->update($request->all());
+        return response()->json($shoppingCart, 200);
     }
 
-    public function destroy(ShoppingCart $ShoppingCart)
+    public function destroy($id)
     {
-        $ShoppingCart->delete();
+        $shoppingCart = ShoppingCart::findOrFail($id);
+        $shoppingCart->delete();
         return response()->json(null, 204);
     }
 }

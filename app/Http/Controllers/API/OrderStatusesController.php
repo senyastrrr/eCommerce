@@ -9,29 +9,34 @@ class OrderStatusesController extends Controller
 {
     public function index()
     {
-        return response()->json(OrderStatus::all());
+        return OrderStatus::all();
     }
 
     public function store(Request $request)
     {
-        $OrderStatus = OrderStatus::create($request->all());
-        return response()->json($OrderStatus, 201);
+        $orderStatus = OrderStatus::create($request->all());
+        return response()->json($orderStatus, 201);
     }
 
-    public function show(OrderStatus $OrderStatus)
+    public function show($id)
     {
-        return response()->json($OrderStatus);
+        return OrderStatus::findOrFail($id);
     }
 
-    public function update(Request $request, OrderStatus $OrderStatus)
+    public function update(Request $request, $id)
     {
-        $OrderStatus->update($request->all());
-        return response()->json($OrderStatus, 200);
+        $orderStatus = OrderStatus::findOrFail($id);
+        $orderStatus->update($request->all());
+
+        return $orderStatus;
     }
 
-    public function destroy(OrderStatus $OrderStatus)
+    public function destroy($id)
     {
-        $OrderStatus->delete();
+        $orderStatus = OrderStatus::findOrFail($id);
+        $orderStatus->delete();
+
         return response()->json(null, 204);
     }
 }
+

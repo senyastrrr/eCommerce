@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function getCurrentUser(Request $request)
-    {
-        return response()->json($request->user());
-    }
-    
     public function index()
     {
         return response()->json(User::all());
@@ -23,9 +18,9 @@ class UsersController extends Controller
         return response()->json($user, 201);
     }
 
-    public function show(User $user)
+    public function show($id)
     {
-        return response()->json($user);
+        return User::findOrFail($id);
     }
 
     public function update(Request $request, User $user)
@@ -39,15 +34,9 @@ class UsersController extends Controller
         $user->delete();
         return response()->json(null, 204);
     }
-
-    public function getUserById($id)
+    
+    public function getCurrentUser(Request $request)
     {
-        $user = User::find($id);
-
-        if ($user) {
-            return response()->json($user);
-        } else {
-            return response()->json(['message' => 'User not found'], 404);
-        }
+        return response()->json($request->user());
     }
 }
