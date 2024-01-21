@@ -13,7 +13,7 @@ const asset = (path) => `/storage/images/${path}`;
 
 export default function CarouselDemo() {
   const plugin = React.useRef(
-    Autoplay({ delay: 1000, stopOnInteraction: true })
+    Autoplay({ delay: 5000, stopOnInteraction: true })
   )
 
   return (
@@ -21,6 +21,7 @@ export default function CarouselDemo() {
       opts={{
         align: "start",
         loop: true,
+        
       }}
       plugins={[plugin.current]}
       className="w-full"
@@ -38,7 +39,8 @@ export default function CarouselDemo() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
+      
+      <CarouselPrevious/>
       <CarouselNext />
     </Carousel>
   )
