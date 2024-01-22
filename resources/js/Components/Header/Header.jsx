@@ -4,7 +4,8 @@ import * as React from "react"
 import Container from "../ui/container";
 import { Link } from '@inertiajs/react';
 import { Button } from "../ui/button";
-import { Search, ShoppingCart, Heart } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Search, ShoppingCart, Heart, Menu } from "lucide-react";
 import ProfileButton from "../ui/ProfileButton";
 
 const asset = (path) => `/storage/images/${path}`;
@@ -28,30 +29,39 @@ export default function Header() {
             href: "/",
             label: "Blog",
         },
-        {
-            href: "/",
-            label: "About",
-        },
-        {
-            href: "/",
-            label: "Contact",
-        },
     ];
 
     return (
-        <header className="sm:flex sm:justify-between border-b">
+        <header className="sm:flex sm:justify-between py-3 px-4 border-b">
             <Container>
-                <div className="relative sm:px-6 lg:px-8 flex h-12 items-center justify-between w-full">
+                <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between w-full">
                     <div className="flex items-center">
+                        <Sheet>
+                            <SheetTrigger>
+                                <Menu className="h-6 md:hidden w-6" />
+                            </SheetTrigger>
+                            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+                                <nav className="flex flex-col gap-4">
+                                    {routes.map((route, i) => (
+                                        <Link
+                                            key={i}
+                                            href={route.href}
+                                            className="block px-2 py-1 text-lg"
+                                        >
+                                            {route.label}
+                                        </Link>
+                                    ))}
+                                </nav>
+                            </SheetContent>
+                        </Sheet>
                         <Link href="/" className="ml-4 lg:ml-0">
-                            <img src={asset("icons/logo-01.png")} alt="Coze Store" />
+                            <h1 className="text-xl font-bold">STORE NAME</h1>
                         </Link>
                     </div>
                     <nav className="mx-6 flex items-center space-x-4 lg:space-x-6 hidden md:block">
-                        {routes.map((route, index) => (
-                            <Button asChild variant="ghost">
+                        {routes.map((route, i) => (
+                            <Button asChild variant="ghost" key={i}>
                                 <Link
-                                    key={index}
                                     href={route.href}
                                     className="text-sm font-medium transition-colors"
                                 >
@@ -60,16 +70,7 @@ export default function Header() {
                             </Button>
                         ))}
                     </nav>
-                    <div className="flex items-center space-x-4">
-                    <Button
-                            variant="ghost"
-                            size="icon"
-                            className="mr-2"
-                            aria-label="Shopping Cart"
-                        >
-                            <Search className="h-6 w-6" />
-                            <span className="sr-only">Search</span>
-                        </Button>
+                    <div className="flex items-center">
                         <Button
                             variant="ghost"
                             size="icon"
@@ -82,8 +83,8 @@ export default function Header() {
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="mr-2"
-                            aria-label="Shopping Cart"
+                            aria-label="Toggle Theme"
+                            className="mr-6"
                         >
                             <Heart className="h-6 w-6" />
                             <span className="sr-only">Heart</span>
