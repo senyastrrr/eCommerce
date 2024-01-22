@@ -4,7 +4,10 @@ import * as React from "react"
 import Container from "../ui/container";
 import { Link } from '@inertiajs/react';
 import { Button } from "../ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, 
+    SheetFooter, SheetDescription, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { Search, ShoppingCart, Heart, Menu } from "lucide-react";
 import ProfileButton from "../ui/ProfileButton";
 
@@ -71,15 +74,46 @@ export default function Header() {
                         ))}
                     </nav>
                     <div className="flex items-center">
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="mr-2"
-                            aria-label="Shopping Cart"
-                        >
-                            <ShoppingCart className="h-6 w-6" />
-                            <span className="sr-only">Shopping Cart</span>
-                        </Button>
+                        <Sheet>
+                            <SheetTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="mr-2"
+                                    aria-label="Shopping Cart"
+                                >
+                                    <ShoppingCart className="h-6 w-6" />
+                                    <span className="sr-only">Shopping Cart</span>
+                                </Button>
+                            </SheetTrigger>
+                            <SheetContent side="right">
+                                <SheetHeader>
+                                    <SheetTitle>Edit profile</SheetTitle>
+                                    <SheetDescription>
+                                        Make changes to your profile here. Click save when you're done.
+                                    </SheetDescription>
+                                </SheetHeader>
+                                <div className="grid gap-4 py-4">
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="name" className="text-right">
+                                            Name
+                                        </Label>
+                                        <Input id="name" value="Pedro Duarte" className="col-span-3" />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="username" className="text-right">
+                                            Username
+                                        </Label>
+                                        <Input id="username" value="@peduarte" className="col-span-3" />
+                                    </div>
+                                </div>
+                                <SheetFooter>
+                                    <SheetClose asChild>
+                                        <Button type="submit">Save changes</Button>
+                                    </SheetClose>
+                                </SheetFooter>
+                            </SheetContent>
+                        </Sheet>
                         <Button
                             variant="ghost"
                             size="icon"
