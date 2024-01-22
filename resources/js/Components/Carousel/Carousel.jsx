@@ -13,7 +13,7 @@ const asset = (path) => `/storage/images/${path}`;
 
 export default function CarouselDemo() {
   const plugin = React.useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: true })
+    Autoplay({ delay: 5000, stopOnInteraction: false })
   )
 
   return (
@@ -21,18 +21,15 @@ export default function CarouselDemo() {
       opts={{
         align: "start",
         loop: true,
-        
       }}
       plugins={[plugin.current]}
       className="w-full"
-      onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
         {Array.from({ length: 4 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <Card>
-              <CardContent>
+          <CarouselItem key={index} className="p-0">
+            <Card className="border-0 p-0">
+              <CardContent className="p-0">
                 <img src={asset(`slide-0${index+1}.jpg`)} alt="" />
               </CardContent>
             </Card>
@@ -40,8 +37,8 @@ export default function CarouselDemo() {
         ))}
       </CarouselContent>
       
-      <CarouselPrevious/>
-      <CarouselNext />
+      {/* <CarouselPrevious/>
+      <CarouselNext /> */}
     </Carousel>
   )
 }
