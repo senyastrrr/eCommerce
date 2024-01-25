@@ -7,7 +7,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
-import CategoryBox from '../CategoryBox/Category';
+import CategoryBox from './Category';
 
 const categories = [
     { title: 'Women', description: 'Spring 2018', image: 'banner-04.jpg' },
