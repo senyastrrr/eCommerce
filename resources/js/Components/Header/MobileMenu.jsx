@@ -7,14 +7,7 @@ export default function MobileMenu({ routes }) {
     return (
         <Sheet>
             <SheetTrigger>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="mr-2 text-gray-700"
-                    aria-label="Shopping Cart"
-                >
-                    <Menu className="h-6 md:hidden w-6" />
-                </Button>
+                <Menu className="h-6 md:hidden w-6" />
             </SheetTrigger>
             <SheetContent side="left" className="w-[300px] sm:w-[400px]">
                 <nav className="flex flex-col gap-4">
