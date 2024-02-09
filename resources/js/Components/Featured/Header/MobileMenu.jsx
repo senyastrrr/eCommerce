@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
-import { Button } from "../ui/button";
-import { Sheet, SheetTrigger, SheetContent } from "../ui/sheet";
+import { Button } from "../../ui/button";
+import { Sheet, SheetTrigger, SheetContent } from "../../ui/sheet";
 import { Menu } from "lucide-react";
 
 export default function MobileMenu({ routes }) {

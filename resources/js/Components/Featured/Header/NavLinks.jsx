@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 const NavLinks = ({ routes }) => {
     return (

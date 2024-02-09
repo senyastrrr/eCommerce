@@ -24,7 +24,7 @@ const CategoriesCarousel = () => {
                 align: "start",
                 loop: true,
             }}
-            className="w-full h-full"
+            className="w-full h-full p-2"
         >
             <CarouselContent>
                 {categories.map((category, index) => (

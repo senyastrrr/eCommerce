@@ -1,8 +1,8 @@
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { Input } from "../../ui/input";
+import { Label } from "../../ui/label";
 import { ShoppingCartIcon } from "lucide-react";
-import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose } from "../ui/sheet";
-import { Button } from "../ui/button";
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose } from "../../ui/sheet";
+import { Button } from "../../ui/button";
 
 const ShoppingCart = () => {
     return (
