@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/react";
-import { Sheet, SheetTrigger, SheetContent } from "../../shared/ui/sheet";
+import { Sheet, SheetTrigger, SheetContent } from "@/shared/ui/sheet";
 
-export default function MobileMenu({ routes }) {
+export function MobileMenu({ routes }) {
     return (
         <Sheet>
             <SheetTrigger>
