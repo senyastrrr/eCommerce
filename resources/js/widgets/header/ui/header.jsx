@@ -19,7 +19,7 @@ export function Header({ routes }) {
                     </Link>
                 </div>
                 <NavLinks routes={routes} />
-                <div className="flex items-center">
+                <div className="flex items-center sm:gap-2 md:gap-4">
                     <ShoppingCart
                         trigger={
                             <ActionButton>

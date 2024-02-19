@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { Button } from "@/shared/ui/button";
 
-export function Menu({ routes }) {
+export function NavLinks({ routes }) {
     return (
         <nav className="mx-auto flex items-center space-x-4 lg:space-x-4 hidden md:block">
             {routes.map((route, i) => (

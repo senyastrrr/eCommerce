@@ -1,1 +1,1 @@
-export { Menu } from "./ui/menu"
+export { NavLinks } from "./ui/menu"

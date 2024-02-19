@@ -1,5 +1,6 @@
 import { Link } from "@inertiajs/react";
 import { Sheet, SheetTrigger, SheetContent } from "@/shared/ui/sheet";
+import { Menu } from "lucide-react";
 
 export function MobileMenu({ routes }) {
     return (
@@ -18,4 +19,4 @@ export function MobileMenu({ routes }) {
             </SheetContent>
         </Sheet>
     );
-};
+}
