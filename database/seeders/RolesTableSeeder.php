@@ -15,9 +15,9 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         $roles = [
-            ['name' => 'Admin', 'description' => 'Administrator Role - Full access to all features.'],
-            ['name' => 'User', 'description' => 'Regular User Role - Limited access to certain features.'],
-            ['name' => 'Employee', 'description' => 'Employee Role - Access to specific employee-related features.'],
+            ['id'=> 1, 'name' => 'Admin', 'description' => 'Administrator Role - Full access to all features.'],
+            ['id'=> 2, 'name' => 'User', 'description' => 'Regular User Role - Limited access to certain features.'],
+            ['id'=> 3, 'name' => 'Employee', 'description' => 'Employee Role - Access to specific employee-related features.'],
         ];
 
         // Insert the data into the roles table

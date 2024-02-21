@@ -17,9 +17,9 @@ class UsersTableSeeder extends Seeder
     {
         // Seed an admin user
         DB::table('users')->insert([
-            'full_name' => 'John Doe',
+            'name' => 'John Doe',
             'email' => 'admin@example.com',
-            'password' => '123',
+            'password' => Hash::make('123'),
             'role_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
@@ -27,9 +27,9 @@ class UsersTableSeeder extends Seeder
 
         // Seed a regular user
         DB::table('users')->insert([
-            'full_name' => 'Jane Doe',
+            'name' => 'Jane Doe',
             'email' => 'user@example.com',
-            'password' => '123',
+            'password' => Hash::make('123'),
             'role_id' => 2,
             'created_at' => now(),
             'updated_at' => now(),
@@ -37,9 +37,9 @@ class UsersTableSeeder extends Seeder
 
         // Seed an employee user
         DB::table('users')->insert([
-            'full_name' => 'Petr Petrov',
+            'name' => 'Petr Petrov',
             'email' => 'employee@example.com',
-            'password' => '123',
+            'password' => Hash::make('123'),
             'role_id' => 3,
             'created_at' => now(),
             'updated_at' => now(),
