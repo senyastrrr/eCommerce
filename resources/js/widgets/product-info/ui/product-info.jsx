@@ -2,8 +2,8 @@ import React from 'react';
 import { Price } from '@/shared/common/price';
 import { StarRating } from '@/shared/common/rating';
 import { CommonSelect } from '@/shared/common/select';
-import { Button } from '@/shared/ui/button';
 import { Label } from '@/shared/ui/label';
+import { AddToCartButton } from '@/features/add-to-cart-button';
 
 export function ProductInfo() {
     return (
@@ -13,7 +13,7 @@ export function ProductInfo() {
             <Price price={2550} discount={10} />
             <CommonSelect placeholder={"Выберите размер"} items={["S", "M", "L", "XL"]} />
             <CommonSelect placeholder={"Выберите цвет"} items={["Белый", "Бордовый", "Оранжевый", "Салатовый"]} />
-            <Button>Add to cart</Button>
+            <AddToCartButton/>
         </div>
     );
 }
