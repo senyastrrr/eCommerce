@@ -7,7 +7,10 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-const queryClient = new QueryClient();
+
+const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: 5, retryDelay: 1000 } }
+});
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
