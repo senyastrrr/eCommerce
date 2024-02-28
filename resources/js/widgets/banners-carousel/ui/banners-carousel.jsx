@@ -1,5 +1,5 @@
-import { useBillboards } from '@/entites/banner/api/queries';
-import { CustomCarousel, AutoplayPlugin } from '@/shared/common/carousel';
+import { useBanners } from '@/entites/banner';
+import { CustomCarousel } from '@/shared/common/carousel';
 import { Card, CardContent } from '@/shared/ui/card';
 import { CarouselItem } from '@/shared/ui/carousel';
 import Autoplay from "embla-carousel-autoplay"
@@ -9,9 +9,9 @@ const asset = (path) => `/storage/images/${path}`;
 
 export function BannersCarousel() {
 
-    const bannersQueries = useBillboards();
+    const bannersQueries = useBanners();
     const plugin = React.useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
-    
+
     if (bannersQueries.isLoading) {
         return <div>Loading...</div>;
     }

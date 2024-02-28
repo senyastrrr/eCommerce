@@ -1,4 +1,4 @@
-import { ProductCard } from "@/entites/product/product-card";
+import { ProductCard } from "@/entites/product";
 
 export function ProductsGrid({ title, products }) {
   return (

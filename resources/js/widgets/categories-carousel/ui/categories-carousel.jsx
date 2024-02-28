@@ -1,9 +1,7 @@
-import { CustomCarousel, AutoplayPlugin } from '@/shared/common/carousel';
-import { Card, CardContent } from '@/shared/ui/card';
+import { CategoryCard } from '@/entites/category';
+import { CustomCarousel } from '@/shared/common/carousel';
 import { CarouselItem } from '@/shared/ui/carousel';
 import React from 'react';
-
-const asset = (path) => `/storage/images/${path}`;
 
 const categories = [
     { title: 'Women', description: 'Spring 2018', image: 'banner-04.jpg' },
@@ -22,16 +20,7 @@ export function CategoriesCarousel() {
         >
             {categories.map((category, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                    <Card className="h-full">
-                        <CardContent className="h-full p-4">
-                            <div className="bg-cover bg-center h-64" style={{ backgroundImage: `url(${asset(category.image)})` }}>
-                                <div className="flex flex-col items-left justify-center p-8">
-                                    <p className="text-2xl font-bold mb-2 text-gray-800">{category.title}</p>
-                                    <p className="text-gray-500 mb-8">{category.description}</p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
+                    <CategoryCard title={category.title} description={category.description} image={category.image}/>
                 </CarouselItem>
             ))}
         </CustomCarousel>
