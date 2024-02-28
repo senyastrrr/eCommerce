@@ -10,6 +10,7 @@ import {
 } from "@/shared/ui/dropdown-menu";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
+import { Link } from '@inertiajs/react';
 
 export function ProfileButton({ image }) {
   return (
@@ -23,11 +24,15 @@ export function ProfileButton({ image }) {
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
+          <Link href={route('profile.edit')}>Profile</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer">Billing</DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer">Subscription</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">Log Out</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
+          <Link href={route('logout')} method="post">Log Out</Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
