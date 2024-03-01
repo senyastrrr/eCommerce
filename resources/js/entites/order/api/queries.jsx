@@ -1,6 +1,6 @@
 import { get } from "@/shared/api"
 import { useQuery } from "@tanstack/react-query"
-import { _queryKey, _root } from "./config";
+import { _orderQueryKey, _orderRoot, _orderLineQueryKey, _orderLineRoot, _orderStatusQueryKey, _orderStatusRoot } from "./config";
 
 export function useOrder(id) {
     return useQuery({
