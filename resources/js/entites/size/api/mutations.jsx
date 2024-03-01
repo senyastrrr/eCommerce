@@ -2,7 +2,7 @@ import { deleteRequest, post, put } from "@/shared/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { _queryKey, _root } from "./config";
 
-export function useCreateColor() {
+export function useCreateSize() {
 
     const queryClient = useQueryClient();
 
@@ -17,7 +17,7 @@ export function useCreateColor() {
     })
 }
 
-export function useUpdateColor() {
+export function useUpdateSize() {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -32,7 +32,7 @@ export function useUpdateColor() {
     })
 }
 
-export function useDeleteColor() {
+export function useDeleteSize() {
     const queryClient = useQueryClient();
 
     return useMutation({

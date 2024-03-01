@@ -1,2 +1,2 @@
-export { useColors } from "./api/queries"
-export { useCreateColor, useUpdateColor, useDeleteColor } from "./api/mutations"
+export { useSizes } from "./api/queries"
+export { useCreateSize, useUpdateSize, useDeleteSize } from "./api/mutations"
