@@ -21,7 +21,7 @@ import { AlertModal } from "@/shared/modals/alert-modal";
 export const CellAction = ({
   data,
 }) => {
-
+console.log(data);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -67,7 +67,7 @@ export const CellAction = ({
             <ContentCopyIcon className="mr-2 h-4 w-4" /> Copy Id
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => route('admin.billboards.edit', { id: billboard.id })}
+            onClick={() => window.location.href = `/admin/billboards/edit/${data.id}`}
           >
             <EditIcon className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
-import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from "@/shared/ui/input"
 import { Button } from "@/shared/ui/button"
@@ -21,12 +20,8 @@ import { AlertModal } from "@/shared/modals/alert-modal"
 //import ImageUpload from "@/shared/ui/image-upload"
 import { useCreateBillboard, useUpdateBillboard, useDeleteBillboard } from ".."
 import DeleteIcon from '@mui/icons-material/Delete';
-
-const formSchema = z.object({
-    id: z.number().int().nonnegative(),
-    content: z.string().min(1),
-    image: z.string().min(1),
-});
+import { formSchema } from "../model/form-schema"
+import ImageUpload from "@/shared/ui/image-upload"
 
 export const BillboardForm = ({
     initialData
@@ -47,13 +42,13 @@ export const BillboardForm = ({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             content: '',
-            image: ''
+            image: '',
+            isActual: false
         }
     });
 
     const onSubmit = async (data) => {
         try {
-            console.log(data);
             setLoading(true);
             if (initialData) {
                 updateBillboard.mutate(data);
@@ -114,12 +109,12 @@ export const BillboardForm = ({
                             <FormItem>
                                 <FormLabel>Background image</FormLabel>
                                 <FormControl>
-                                    {/*<ImageUpload
+                                    <ImageUpload
                                         value={field.value ? [field.value] : []}
                                         disabled={loading}
                                         onChange={(url) => field.onChange(url)}
                                         onRemove={() => field.onChange('')}
-                        />*/}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
