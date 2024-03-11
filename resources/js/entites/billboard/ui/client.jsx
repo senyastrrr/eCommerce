@@ -15,7 +15,7 @@ export const BillboardClient = ({
     <>
       <div className="flex items-center justify-between">
         <Heading title={`Billboards (${data.length})`} description="Manage billboards for your store" />
-        <Button onClick={() => route("admin.billboards.create")}>
+        <Button onClick={() => window.location.href = `/admin/billboards/create`}>
           <AddIcon className="mr-2 h-4 w-4" /> Add New
         </Button>
       </div>

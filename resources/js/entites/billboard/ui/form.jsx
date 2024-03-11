@@ -17,11 +17,11 @@ import {
 import { Separator } from "@/shared/ui/separator"
 import { Heading } from "@/shared/ui/heading"
 import { AlertModal } from "@/shared/modals/alert-modal"
-//import ImageUpload from "@/shared/ui/image-upload"
 import { useCreateBillboard, useUpdateBillboard, useDeleteBillboard } from ".."
 import DeleteIcon from '@mui/icons-material/Delete';
 import { formSchema } from "../model/form-schema"
 import ImageUpload from "@/shared/ui/image-upload"
+import { Checkbox } from "@/shared/ui/checkbox"
 
 export const BillboardForm = ({
     initialData
@@ -55,7 +55,7 @@ export const BillboardForm = ({
             } else {
                 createBillboard.mutate(data);
             }
-            route('admin.billboards')
+            window.location.href = `/admin/billboards`;
             toast.success(toastMessage);
         } catch (error) {
             toast.error('Something went wrong.');
@@ -67,9 +67,8 @@ export const BillboardForm = ({
     const onDelete = async () => {
         try {
             setLoading(true);
-
-            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
-            route('admin.billboards')
+            deleteBillboard.mutate(initialData.id);
+            window.location.href = `/admin/billboards`;
             toast.success('Billboard deleted.');
         } catch (error) {
             toast.error('Make sure you removed all categories using this billboard first.');
@@ -126,10 +125,32 @@ export const BillboardForm = ({
                             name="content"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Label</FormLabel>
+                                    <FormLabel>Billboard content</FormLabel>
                                     <FormControl>
                                         <Input disabled={loading} placeholder="Billboard content" {...field} />
                                     </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                    <div className="md:grid md:grid-cols-3 gap-8">
+                        <FormField
+                            control={form.control}
+                            name="isActual"
+                            render={({ field }) => (
+                                
+                                <FormItem>
+                                    <FormControl>
+                                        <Checkbox
+                                            label="Is Actual"
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                    <FormLabel>
+                                        is Actual
+                                    </FormLabel>
                                     <FormMessage />
                                 </FormItem>
                             )}

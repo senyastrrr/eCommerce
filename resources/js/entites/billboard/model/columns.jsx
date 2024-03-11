@@ -5,7 +5,7 @@ import { CellAction } from "../ui/cell-action"
 export const columns = [
     {
         accessorKey: "image",
-        header: "ImageURL",
+        header: "Image URL",
     },
     {
         accessorKey: "content",

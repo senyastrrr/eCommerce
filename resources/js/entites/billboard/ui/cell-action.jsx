@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { useState } from "react";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EditIcon from '@mui/icons-material/Edit';
@@ -17,20 +16,21 @@ import {
   DropdownMenuTrigger
 } from "@/shared/ui/dropdown-menu";
 import { AlertModal } from "@/shared/modals/alert-modal";
+import { useDeleteBillboard } from "..";
 
 export const CellAction = ({
   data,
 }) => {
-console.log(data);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const deleteBillboard = useDeleteBillboard();
 
   const onConfirm = async () => {
     try {
+      console.log(data.id);
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+      //deleteBillboard.mutate(data.id);
       toast.success('Billboard deleted.');
-      router.refresh();
     } catch (error) {
       toast.error('Make sure you removed all categories using this billboard first.');
     } finally {
@@ -72,7 +72,7 @@ console.log(data);
             <EditIcon className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => setOpen(true)}
+            onClick={() => onConfirm()}
           >
             <DeleteIcon className="mr-2 h-4 w-4" /> Delete
           </DropdownMenuItem>
