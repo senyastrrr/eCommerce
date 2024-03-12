@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\BillboardsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -18,9 +19,14 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'canRegister' => Route::has('register')
+    ]);
+});
+
+Route::get('/product-details/{id}', function () {
+    return Inertia::render('ProductDetails', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register')
     ]);
 });
 
@@ -30,4 +36,31 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(function () {
+    Route::prefix('billboards')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/billboard/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/billboard/create');
+        })->name('admin.billboards.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/billboard/edit', ['id' => $id]);
+        })->name('admin.billboards.edit');
+    });
+    Route::prefix('categories')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/category/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/category/create');
+        })->name('admin.categories.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/category/edit', ['id' => $id]);
+        })->name('admin.categories.edit');
+    });
+});
+
+require __DIR__ . '/auth.php';
