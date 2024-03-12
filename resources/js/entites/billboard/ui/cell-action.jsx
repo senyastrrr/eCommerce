@@ -27,9 +27,8 @@ export const CellAction = ({
 
   const onConfirm = async () => {
     try {
-      console.log(data.id);
       setLoading(true);
-      //deleteBillboard.mutate(data.id);
+      deleteBillboard.mutate(data.id);
       toast.success('Billboard deleted.');
     } catch (error) {
       toast.error('Make sure you removed all categories using this billboard first.');

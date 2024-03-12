@@ -41,6 +41,7 @@ export const BillboardForm = ({
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
+            id: null,
             content: '',
             image: '',
             isActual: false
@@ -49,6 +50,7 @@ export const BillboardForm = ({
 
     const onSubmit = async (data) => {
         try {
+            console.log(data);
             setLoading(true);
             if (initialData) {
                 updateBillboard.mutate(data);
@@ -139,13 +141,13 @@ export const BillboardForm = ({
                             control={form.control}
                             name="isActual"
                             render={({ field }) => (
-                                
+
                                 <FormItem>
                                     <FormControl>
                                         <Checkbox
                                             label="Is Actual"
                                             checked={field.value}
-                                            onCheckedChange={field.onChange}
+                                            onCheckedChange={(value) => field.onChange(value)}
                                         />
                                     </FormControl>
                                     <FormLabel>
