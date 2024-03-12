@@ -20,6 +20,7 @@ use App\Http\Controllers\API\RolesController;
 use App\Http\Controllers\API\ShoppingCartItemsController;
 use App\Http\Controllers\API\ShoppingCartsController;
 use App\Http\Controllers\API\SizesController;
+use App\Http\Controllers\API\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,8 @@ Route::apiResource('roles', RolesController::class);
 Route::apiResource('shopping-cart-items', ShoppingCartItemsController::class);
 Route::apiResource('shopping-carts', ShoppingCartsController::class);
 Route::apiResource('sizes', SizesController::class);
+Route::post('/images/upload', [ImageController::class, 'store']);
+
 
 
 
