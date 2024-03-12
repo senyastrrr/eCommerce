@@ -1,0 +1,1 @@
+export const asset = (path) => `/storage/images/${path}`;
