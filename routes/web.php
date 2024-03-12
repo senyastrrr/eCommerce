@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(function () {
+    
     Route::prefix('billboards')->group(function() {
         Route::get('/', function () {
             return Inertia::render('admin/billboard/index');
@@ -49,6 +50,7 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(funct
             return Inertia::render('admin/billboard/edit', ['id' => $id]);
         })->name('admin.billboards.edit');
     });
+
     Route::prefix('categories')->group(function() {
         Route::get('/', function () {
             return Inertia::render('admin/category/index');
@@ -61,6 +63,7 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(funct
             return Inertia::render('admin/category/edit', ['id' => $id]);
         })->name('admin.categories.edit');
     });
+
     Route::prefix('sizes')->group(function() {
         Route::get('/', function () {
             return Inertia::render('admin/size/index');
@@ -72,6 +75,19 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(funct
         Route::get('edit/{id}', function ($id) {
             return Inertia::render('admin/size/edit', ['id' => $id]);
         })->name('admin.sizes.edit');
+    });
+
+    Route::prefix('roles')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/role/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/role/create');
+        })->name('admin.roles.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/role/edit', ['id' => $id]);
+        })->name('admin.roles.edit');
     });
 });
 
