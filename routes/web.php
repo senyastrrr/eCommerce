@@ -61,6 +61,18 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(funct
             return Inertia::render('admin/category/edit', ['id' => $id]);
         })->name('admin.categories.edit');
     });
+    Route::prefix('sizes')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/size/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/size/create');
+        })->name('admin.sizes.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/size/edit', ['id' => $id]);
+        })->name('admin.sizes.edit');
+    });
 });
 
 require __DIR__ . '/auth.php';
