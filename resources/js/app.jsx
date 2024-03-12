@@ -5,8 +5,9 @@ import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Ecommerce';
 
 const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 5, retryDelay: 1000 } }
@@ -21,6 +22,7 @@ createInertiaApp({
         root.render(
             <QueryClientProvider client={queryClient}>
                 <App {...props} />
+                <Toaster />
             </QueryClientProvider>);
     },
     progress: {
