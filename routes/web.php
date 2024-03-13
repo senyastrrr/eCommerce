@@ -89,6 +89,19 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(funct
             return Inertia::render('admin/role/edit', ['id' => $id]);
         })->name('admin.roles.edit');
     });
+
+    Route::prefix('colors')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/color/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/color/create');
+        })->name('admin.colors.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/color/edit', ['id' => $id]);
+        })->name('admin.colors.edit');
+    });
 });
 
 require __DIR__ . '/auth.php';
