@@ -38,6 +38,10 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(function () {
     
+    Route::get('/', function () {
+        return Inertia::render('admin/index');
+    });
+
     Route::prefix('billboards')->group(function() {
         Route::get('/', function () {
             return Inertia::render('admin/billboard/index');
@@ -101,6 +105,71 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(funct
         Route::get('edit/{id}', function ($id) {
             return Inertia::render('admin/color/edit', ['id' => $id]);
         })->name('admin.colors.edit');
+    });
+
+    Route::prefix('products')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/product/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/product/create');
+        })->name('admin.product.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/product/edit', ['id' => $id]);
+        })->name('admin.product.edit');
+    });
+
+    Route::prefix('product-attributes')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/product-attribute/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/product-attribute/create');
+        })->name('admin.product.attributes.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/product-attribute/edit', ['id' => $id]);
+        })->name('admin.product.attributes.edit');
+    });
+
+    Route::prefix('product-configurations')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/product-configuration/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/product-configuration/create');
+        })->name('admin.product.configurations.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/product-configuration/edit', ['id' => $id]);
+        })->name('admin.product.configurations.edit');
+    });
+
+    Route::prefix('product-items')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/product-item/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/product-item/create');
+        })->name('admin.product.items.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/product-item/edit', ['id' => $id]);
+        })->name('admin.product.items.edit');
+    });
+
+    Route::prefix('product-item-sizes')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/product-item-size/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/product-item-size/create');
+        })->name('admin.product.item.sizes.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/product-item-size/edit', ['id' => $id]);
+        })->name('admin.product.item.sizes.edit');
     });
 });
 
