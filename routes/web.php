@@ -36,6 +36,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('admin')->middleware(['auth', 'role:Admin'])->group(function () {
+
+    Route::prefix('users')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/user/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/user/create');
+        })->name('admin.users.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/user/edit', ['id' => $id]);
+        })->name('admin.users.edit');
+    });
+});
+
 Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(function () {
     
     Route::get('/', function () {
@@ -170,6 +186,19 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(funct
         Route::get('edit/{id}', function ($id) {
             return Inertia::render('admin/product-item-size/edit', ['id' => $id]);
         })->name('admin.product.item.sizes.edit');
+    });
+
+    Route::prefix('promotions')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/promotion/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/promotion/create');
+        })->name('admin.promotions.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/promotion/edit', ['id' => $id]);
+        })->name('admin.promotions.edit');
     });
 });
 
