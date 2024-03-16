@@ -5,4 +5,5 @@ export const formSchema = z.object({
     parent_id: z.nullable(z.string()),
     name: z.string().min(1),
     description: z.string().min(1),
+    discount: z.coerce.number().optional().nullable(),
 });

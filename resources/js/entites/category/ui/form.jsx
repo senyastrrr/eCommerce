@@ -21,6 +21,8 @@ import { useCreateCategory, useUpdateCategory, useDeleteCategory, useCategories 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { formSchema } from "../model/form-schema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select"
+import { useCreatePromotionCategory } from "@/entites/promotion-category"
+import { usePromotions } from "@/entites/promotion"
 
 export const CategoryForm = ({
     initialData
@@ -34,6 +36,8 @@ export const CategoryForm = ({
     const action = initialData ? 'Save changes' : 'Create';
 
     const categories = useCategories();
+    const createPromotionCategory = useCreatePromotionCategory();
+    const promotions = usePromotions();
     const createCategory = useCreateCategory();
     const updateCategory = useUpdateCategory();
     const deleteCategory = useDeleteCategory();
@@ -44,7 +48,8 @@ export const CategoryForm = ({
             id: null,
             parent_id: '',
             name: '',
-            description: ''
+            description: '',
+            discount: null,
         }
     });
 
@@ -53,7 +58,11 @@ export const CategoryForm = ({
             console.log(data);
             setLoading(true);
             if (initialData) {
-                updateCategory.mutate(data);
+                const updatedData = { ...data };
+                delete updatedData.discount;
+                if (data.discount)
+                    createPromotionCategory.mutate({ category_id: initialData.id, promotion_id: data.discount });
+                updateCategory.mutate(updatedData);
             } else {
                 createCategory.mutate(data);
             }
@@ -79,7 +88,7 @@ export const CategoryForm = ({
             setOpen(false);
         }
     }
-    if (categories.isSuccess) {
+    if (categories.isSuccess && promotions.isSuccess) {
         return (
             <>
                 <AlertModal
@@ -165,6 +174,37 @@ export const CategoryForm = ({
                                 )}
                             />
                         </div>
+
+                        <div className="md:grid md:grid-cols-3 gap-8">
+                            <FormField
+                                control={form.control}
+                                name="discount"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Discount</FormLabel>
+                                        <FormControl>
+                                            <Select
+                                                onValueChange={field.onChange}
+                                                defaultValue={field.value?.toString()}
+                                            >
+                                                <SelectTrigger id="category">
+                                                    <SelectValue placeholder="Select" />
+                                                </SelectTrigger>
+                                                <SelectContent position="popper">
+                                                    {promotions.data.map((promotion) => (
+                                                        <SelectItem value={promotion.id.toString()} key={promotion.id}>
+                                                            {promotion.name} - {promotion.discount_rate}%
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+
                         <Button disabled={loading} className="ml-auto" type="submit">
                             {action}
                         </Button>
