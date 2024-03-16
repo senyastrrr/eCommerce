@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\BillboardsController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 /*
@@ -199,6 +197,19 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Employee'])->group(funct
         Route::get('edit/{id}', function ($id) {
             return Inertia::render('admin/promotion/edit', ['id' => $id]);
         })->name('admin.promotions.edit');
+    });
+
+    Route::prefix('order-statuses')->group(function() {
+        Route::get('/', function () {
+            return Inertia::render('admin/order-status/index');
+        });
+        Route::get('create', function () {
+            return Inertia::render('admin/order-status/create');
+        })->name('admin.order.statuses.create');
+    
+        Route::get('edit/{id}', function ($id) {
+            return Inertia::render('admin/order-status/edit', ['id' => $id]);
+        })->name('admin.order.statuses.edit');
     });
 });
 
