@@ -2,6 +2,7 @@
 
 import { useCategory } from "@/entites/category";
 import { CellAction } from "../ui/cell-action"
+import { usePromotionByProductId } from "@/entites/promotion";
 
 export const columns = [
     {
@@ -38,7 +39,17 @@ export const columns = [
         accessorKey: "description",
         header: "Description",
     },
-    
+    {
+        accessorKey: "discount",
+        header: "Discount",
+        cell: ({ row }) => {
+            const product_id = row.original.id;
+            const promotion = usePromotionByProductId(product_id);
+            if(promotion.isSuccess)
+                return promotion.data.discount_rate;
+            return 0;
+        }
+    },
     {
         id: "actions",
         cell: ({ row }) => <CellAction data={row.original} />

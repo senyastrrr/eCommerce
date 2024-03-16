@@ -23,6 +23,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { formSchema } from "../model/form-schema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select"
 import ImageUpload from "@/shared/ui/image-upload"
+import { usePromotions } from "@/entites/promotion"
+import { useCreatePromotionProduct } from "@/entites/promotion-product"
 
 export const ProductForm = ({
     initialData
@@ -36,6 +38,8 @@ export const ProductForm = ({
     const action = initialData ? 'Save changes' : 'Create';
 
     const categories = useCategories();
+    const promotions = usePromotions();
+    const createPromotionProduct = useCreatePromotionProduct();
     const createProduct = useCreateProduct();
     const updateProduct = useUpdateProduct();
     const deleteProduct = useDeleteProduct();
@@ -50,6 +54,7 @@ export const ProductForm = ({
             title: '',
             description: '',
             price: 0,
+            discount: null,
         }
     });
 
@@ -58,9 +63,14 @@ export const ProductForm = ({
             console.log(data);
             setLoading(true);
             if (initialData) {
-                updateProduct.mutate(data);
+                const updatedData = { ...data };
+                delete updatedData.discount;
+                updateProduct.mutate(updatedData);
+                if (data.discount)
+                    createPromotionProduct.mutate({ product_id: initialData.id, promotion_id: data.discount });
             } else {
                 createProduct.mutate(data);
+                console.log(createProduct.data);
             }
             window.location.href = `/admin/products`;
             toast.success(toastMessage);
@@ -84,7 +94,7 @@ export const ProductForm = ({
             setOpen(false);
         }
     }
-    if (categories.isSuccess) {
+    if (categories.isSuccess && promotions.isSuccess) {
         return (
             <>
                 <AlertModal
@@ -159,7 +169,7 @@ export const ProductForm = ({
                                     </FormItem>
                                 )}
                             />
-                        </div>         
+                        </div>
 
                         <div className="md:grid md:grid-cols-3 gap-8">
                             <FormField
@@ -191,7 +201,7 @@ export const ProductForm = ({
                             />
                         </div>
 
-                         <div className="md:grid md:grid-cols-3 gap-8">
+                        <div className="md:grid md:grid-cols-3 gap-8">
                             <FormField
                                 control={form.control}
                                 name="price"
@@ -222,7 +232,38 @@ export const ProductForm = ({
                                 )}
                             />
                         </div>
-                       
+
+                        <div className="md:grid md:grid-cols-3 gap-8">
+                            <FormField
+                                control={form.control}
+                                name="discount"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Discount</FormLabel>
+                                        <FormControl>
+                                            <Select
+                                                onValueChange={field.onChange}
+                                                defaultValue={field.value?.toString()}
+                                            >
+                                                <SelectTrigger id="category">
+                                                    <SelectValue placeholder="Select" />
+                                                </SelectTrigger>
+                                                <SelectContent position="popper">
+                                                    {promotions.data.map((promotion) => (
+                                                        <SelectItem value={promotion.id.toString()} key={promotion.id}>
+                                                            {promotion.name} - {promotion.discount_rate}%
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+
+
                         <Button disabled={loading} className="ml-auto" type="submit">
                             {action}
                         </Button>
