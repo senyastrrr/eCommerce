@@ -9,7 +9,7 @@ const asset = (path) => `/storage/images/${path}`;
 export function ProductCarousel() {
     return (
         <CustomCarousel
-        className="flex w-1/3"
+        className="flex w-1/3 min-w-80"
         isButtonsVisible={true}
         isLooped={true}
       >
@@ -17,7 +17,7 @@ export function ProductCarousel() {
           <CarouselItem key={index} className="p-0">
             <Card className="border-0 p-0">
               <CardContent className="p-0">
-                <img src={asset(`product-0${index + 1}.jpg`)} alt="" />
+                <img src={asset(`product-0${index + 1}.jpg`)} alt="" className='rounded-lg'/>
               </CardContent>
             </Card>
           </CarouselItem>

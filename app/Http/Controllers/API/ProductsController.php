@@ -1,8 +1,12 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductItem;
+use App\Models\PromotionProduct;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -38,5 +42,18 @@ class ProductsController extends Controller
 
         return response()->json(null, 204);
     }
-}
 
+    public function getDiscountedProducts()
+    {
+        $discountedProducts = Product::whereIn('id', PromotionProduct::pluck('product_id'))->get();
+        return response()->json($discountedProducts);
+    }
+
+    public function getProductColors($id)
+    {
+        $colors = Color::whereIn('id', ProductItem::where('product_id', $id)
+            ->pluck('color_id'))->get();
+
+        return response()->json($colors, 200);
+    }
+}

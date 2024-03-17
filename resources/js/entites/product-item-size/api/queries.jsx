@@ -9,6 +9,13 @@ export function useProductItemSize(id) {
     })
 }
 
+export function useSizesByProductId(id) {
+    return useQuery({
+        queryKey: [_queryKey, id],
+        queryFn: () => get(`${_root}/get-sizes-by-product-id/${id}`)
+    })
+}
+
 export function useProductItemSizes() {
     return useQuery({
         queryKey: [_queryKey],

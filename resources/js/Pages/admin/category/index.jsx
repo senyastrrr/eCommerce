@@ -1,6 +1,6 @@
-import { useCategories, CategoryClient } from "@/entites/Category"
+import { useCategories, CategoryClient } from "@/entites/category"
 
-export function Categories() {
+export function CategoriesPage() {
 
     const Categories = useCategories();
 
@@ -22,4 +22,4 @@ export function Categories() {
     }
 }
 
-export default Categories;
+export default CategoriesPage;

@@ -1,4 +1,4 @@
-export const routes = [
+export const home = [
     { href: "/", label: "Home" },
     { href: "/", label: "Shop" },
     { href: "/", label: "Features" },

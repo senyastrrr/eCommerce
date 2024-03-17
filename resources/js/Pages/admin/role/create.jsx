@@ -1,6 +1,6 @@
 import { RoleForm } from "@/entites/role";
 
-const CreateRole = () => {
+const CreateRolePage = () => {
 
     return (
         <div className="flex-col">
@@ -11,4 +11,4 @@ const CreateRole = () => {
     );
 }
 
-export default CreateRole;
+export default CreateRolePage;

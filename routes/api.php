@@ -38,8 +38,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/user/{id}', [UsersController::class, 'getUserById']);
+Route::get('test-discounted-products', function () {
+    $controller = new ProductsController();
+    return $controller->getDiscountedProducts();
+});
 Route::apiResource('users', UsersController::class);
 Route::apiResource('billboards', BillboardsController::class);
 Route::apiResource('categories', CategoriesController::class);
@@ -49,20 +51,29 @@ Route::apiResource('order-statuses', OrderStatusesController::class);
 Route::apiResource('orders', OrdersController::class);
 Route::apiResource('product-attributes', ProductAttributesController::class);
 Route::apiResource('product-configurations', ProductConfigurationsController::class);
+
 Route::apiResource('product-items', ProductItemsController::class);
+Route::get('product-items/get-by-product-id/{id}', [ProductItemsController::class, 'getByProductId']);
+
 Route::apiResource('product-item-sizes', ProductItemSizesController::class);
+Route::get('product-item-sizes/get-sizes-by-product-id/{id}', [ProductItemSizesController::class, 'getProductItemSizes']);
+
 Route::apiResource('products', ProductsController::class);
+Route::get('discounted-products', [ProductsController::class, 'getDiscountedProducts']);
+Route::get('products/get-product-colors/{id}', [ProductsController::class, 'getProductColors']);
+
 Route::apiResource('promotion-categories', PromotionCategoriesController::class);
 Route::apiResource('promotion-products', PromotionProductsController::class);
+
 Route::apiResource('promotions', PromotionsController::class);
+Route::get('promotions/get-by-product-id/{id}', [PromotionsController::class, 'getByProductId']);
+Route::get('promotions/get-by-category-id/{id}', [PromotionsController::class, 'getByCategoryId']);
+
 Route::apiResource('review-comments', ReviewCommentsController::class);
 Route::apiResource('reviews', ReviewsController::class);
 Route::apiResource('roles', RolesController::class);
 Route::apiResource('shopping-cart-items', ShoppingCartItemsController::class);
 Route::apiResource('shopping-carts', ShoppingCartsController::class);
 Route::apiResource('sizes', SizesController::class);
+
 Route::post('/images/upload', [ImageController::class, 'store']);
-
-
-
-

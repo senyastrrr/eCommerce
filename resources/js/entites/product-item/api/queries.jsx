@@ -9,6 +9,13 @@ export function useProductItem(id) {
     })
 }
 
+export function useProductItemsByProductId(id) {
+    return useQuery({
+        queryKey: [_queryKey, id],
+        queryFn: () => get(`${_root}/get-by-product-id/${id}`)
+    })
+}
+
 export function useProductItems() {
     return useQuery({
         queryKey: [_queryKey],

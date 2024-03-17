@@ -1,6 +1,6 @@
 import { SizeForm } from "@/entites/size";
 
-const CreateSize = () => {
+const CreateSizePage = () => {
 
     return (
         <div className="flex-col">
@@ -11,4 +11,4 @@ const CreateSize = () => {
     );
 }
 
-export default CreateSize;
+export default CreateSizePage;

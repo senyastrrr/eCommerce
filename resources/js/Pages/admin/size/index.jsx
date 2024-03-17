@@ -1,6 +1,6 @@
 import { useSizes, SizeClient } from "@/entites/size"
 
-export function Sizes() {
+export function SizesPage() {
 
     const Sizes = useSizes();
 
@@ -22,4 +22,4 @@ export function Sizes() {
     }
 }
 
-export default Sizes;
+export default SizesPage;

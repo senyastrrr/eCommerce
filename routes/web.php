@@ -21,8 +21,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/product-details/{id}', function () {
+Route::get('/product-details/{id}', function ($id) {
     return Inertia::render('ProductDetails', [
+        'id' => $id,
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register')
     ]);

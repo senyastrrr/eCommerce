@@ -3,10 +3,10 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 
 
-export function StarRating() {
+export function StarRating({ isReadOnly }) {
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
-
+  console.log(isReadOnly);
   return (
     <Box
       sx={{
@@ -17,6 +17,7 @@ export function StarRating() {
       <Rating
         value={value}
         precision={0.5}
+        readOnly={isReadOnly}
         onChange={(event, newValue) => {
           setValue(newValue);
         }}

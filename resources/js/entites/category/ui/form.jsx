@@ -21,8 +21,8 @@ import { useCreateCategory, useUpdateCategory, useDeleteCategory, useCategories 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { formSchema } from "../model/form-schema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select"
-import { useCreatePromotionCategory } from "@/entites/promotion-category"
-import { usePromotions } from "@/entites/promotion"
+import { useCreatePromotionCategory, useUpdatePromotionCategory } from "@/entites/promotion-category"
+import { usePromotion, usePromotions } from "@/entites/promotion"
 
 export const CategoryForm = ({
     initialData
@@ -36,7 +36,7 @@ export const CategoryForm = ({
     const action = initialData ? 'Save changes' : 'Create';
 
     const categories = useCategories();
-    const createPromotionCategory = useCreatePromotionCategory();
+    const updatePromotionCategory = useUpdatePromotionCategory();
     const promotions = usePromotions();
     const createCategory = useCreateCategory();
     const updateCategory = useUpdateCategory();
@@ -60,8 +60,9 @@ export const CategoryForm = ({
             if (initialData) {
                 const updatedData = { ...data };
                 delete updatedData.discount;
+                console.log(data.discount);
                 if (data.discount)
-                    createPromotionCategory.mutate({ category_id: initialData.id, promotion_id: data.discount });
+                    updatePromotionCategory.mutate({ category_id: initialData.id, promotion_id: data.discount });
                 updateCategory.mutate(updatedData);
             } else {
                 createCategory.mutate(data);

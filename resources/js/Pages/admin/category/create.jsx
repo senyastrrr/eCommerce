@@ -1,6 +1,6 @@
 import { CategoryForm } from "@/entites/category";
 
-const CreateCategory = () => {
+const CreateCategoryPage = () => {
 
     return (
         <div className="flex-col">
@@ -11,4 +11,4 @@ const CreateCategory = () => {
     );
 }
 
-export default CreateCategory;
+export default CreateCategoryPage;

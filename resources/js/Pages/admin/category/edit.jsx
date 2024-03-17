@@ -1,7 +1,6 @@
-import { CategoryForm } from "@/entites/Category";
-import { useCategory } from "@/entites/Category/api/queries";
+import { CategoryForm, useCategory } from "@/entites/category";
 
-const EditCategory = ({ id }) => {
+const EditCategoryPage = ({ id }) => {
     const Category = useCategory(id);
 
     if (Category.isLoading) {
@@ -22,4 +21,4 @@ const EditCategory = ({ id }) => {
     }
 }
 
-export default EditCategory;
+export default EditCategoryPage;

@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductItemSize;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class ProductItemSizesController extends Controller
@@ -38,5 +40,13 @@ class ProductItemSizesController extends Controller
 
         return response()->json(null, 204);
     }
-}
 
+    public function getProductItemSizes($id)
+    {
+        $sizes = Size::whereIn('id', ProductItemSize::where('product_id', $id)
+            ->where('qty', '>', 0)
+            ->pluck('size_id'))->get();
+
+        return response()->json($sizes, 200);
+    }
+}

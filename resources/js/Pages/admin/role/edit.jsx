@@ -1,7 +1,7 @@
 import { RoleForm } from "@/entites/role";
 import { useRole } from "@/entites/role/api/queries";
 
-const EditRole = ({ id }) => {
+const EditRolePage = ({ id }) => {
     const Role = useRole(id);
 
     if (Role.isLoading) {
@@ -22,4 +22,4 @@ const EditRole = ({ id }) => {
     }
 }
 
-export default EditRole;
+export default EditRolePage;

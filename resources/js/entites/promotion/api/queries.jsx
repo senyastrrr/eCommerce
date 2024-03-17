@@ -9,6 +9,20 @@ export function usePromotion(id) {
     })
 }
 
+export function usePromotionByProductId(id) {
+    return useQuery({
+        queryKey: [_queryKey, id],
+        queryFn: () => get(`${_root}/get-by-product-id/${id}`)
+    })
+}
+
+export function usePromotionByCategoryId(id) {
+    return useQuery({
+        queryKey: [_queryKey, id],
+        queryFn: () => get(`${_root}/get-by-category-id/${id}`)
+    })
+}
+
 export function usePromotions() {
     return useQuery({
         queryKey: [_queryKey],

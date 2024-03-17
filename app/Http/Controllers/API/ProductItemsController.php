@@ -38,5 +38,10 @@ class ProductItemsController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function getByProductId($id){
+        $productItems = ProductItem::where('product_id', $id);
+        return response()->json($productItems, 201);
+    }
 }
 

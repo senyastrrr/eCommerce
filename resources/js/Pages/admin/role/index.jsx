@@ -1,6 +1,6 @@
 import { useRoles, RoleClient } from "@/entites/role"
 
-export function Roles() {
+export function RolesPage() {
 
     const Roles = useRoles();
 
@@ -22,4 +22,4 @@ export function Roles() {
     }
 }
 
-export default Roles;
+export default RolesPage;

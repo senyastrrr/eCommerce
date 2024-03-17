@@ -1,7 +1,7 @@
 import { SizeForm } from "@/entites/size";
 import { useSize } from "@/entites/size/api/queries";
 
-const EditSize = ({ id }) => {
+const EditSizePage = ({ id }) => {
     const Size = useSize(id);
 
     if (Size.isLoading) {
@@ -22,4 +22,4 @@ const EditSize = ({ id }) => {
     }
 }
 
-export default EditSize;
+export default EditSizePage;

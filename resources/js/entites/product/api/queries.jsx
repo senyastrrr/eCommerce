@@ -9,6 +9,14 @@ export function useProduct(id) {
     })
 }
 
+export function useDiscountedProducts(){
+    return useQuery({
+        queryKey: [`discounted-${_queryKey}`],
+        queryFn: () => get(`discounted-products`),
+        refetchOnWindowFocus: false,
+    });
+}
+
 export function useProducts() {
     return useQuery({
         queryKey: [_queryKey],
