@@ -37,4 +37,10 @@ class ShoppingCartsController extends Controller
         $shoppingCart->delete();
         return response()->json(null, 204);
     }
+
+    public function getByUserId($id)
+    {
+        $shoppingCart = ShoppingCart::where('user_id', $id)->first();
+        return response()->json($shoppingCart, 201);
+    }
 }
