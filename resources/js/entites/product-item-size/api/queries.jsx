@@ -11,8 +11,22 @@ export function useProductItemSize(id) {
 
 export function useSizesByProductId(id) {
     return useQuery({
-        queryKey: [_queryKey, id],
+        queryKey: [`${_queryKey}-by-product-id`, id],
         queryFn: () => get(`${_root}/get-sizes-by-product-id/${id}`)
+    })
+}
+
+export function useProductItemSizeDetails(id) {
+    return useQuery({
+        queryKey: [`${_queryKey}-details`, id],
+        queryFn: () => get(`${_root}/${id}/details`)
+    })
+}
+
+export function useProductItemSizeByProductAndSize(id, size) {
+    return useQuery({
+        queryKey: [`${_queryKey}-by-product-and-size`, id, size],
+        queryFn: () => get(`${_root}/get-by-product-and-size/${id}/${size}`)
     })
 }
 
