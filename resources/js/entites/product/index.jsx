@@ -1,5 +1,5 @@
 export { ProductCard } from "./ui/product-card"
-export { useProducts, useProduct, useDiscountedProducts } from "./api/queries"
+export { useProducts, useProduct, useDiscountedProducts, useFeaturedProducts, useProductColors } from "./api/queries"
 export { useCreateProduct, useUpdateProduct, useDeleteProduct } from "./api/mutations"
 export { ProductClient } from "./ui/client"
 export { ProductForm } from "./ui/form"
