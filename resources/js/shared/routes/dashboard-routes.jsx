@@ -1,7 +1,7 @@
 export const dashboard = [
     {
-        href: ``,
-        label: 'Overview',
+        href: `/admin`,
+        label: 'Dashboard',
     },
     {
         href: `/admin/billboards`,
@@ -44,7 +44,7 @@ export const dashboard = [
         label: 'Orders',
     },
     {
-        href: `/admin/settings`,
-        label: 'Settings',
+        href: `/admin/users`,
+        label: 'Users',
     },
 ]

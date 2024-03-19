@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 export function StarRating({ isReadOnly }) {
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
-  console.log(isReadOnly);
+  
   return (
     <Box
       sx={{
