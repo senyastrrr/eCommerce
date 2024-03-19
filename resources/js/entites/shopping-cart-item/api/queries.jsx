@@ -9,6 +9,13 @@ export function useShoppingCartItem(id) {
     })
 }
 
+export function useShoppingCartItemsByUserId(id) {
+    return useQuery({
+        queryKey: [_queryKey, id],
+        queryFn: () => get(`user-cart-items/${id}`)
+    })
+}
+
 export function useShoppingCartItems() {
     return useQuery({
         queryKey: [_queryKey],
