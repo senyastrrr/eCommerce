@@ -28,30 +28,28 @@ export function Header({ routes }) {
                 </div>
                 <NavLinks routes={routes} />
                 {role.isSuccess && (role.data.name === 'Admin' || role.data.name === 'Employee') && (
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant="outline">Dashboard</Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56">
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuGroup>
-                                    {dashboard.map((route, i) => (
-                                        <DropdownMenuItem key={i}>
-                                            <ActionButton asChild variant="ghost">
-                                                <Link
-                                                    href={route.href}
-                                                    className="text-sm font-medium transition-colors"
-                                                >
-                                                    {route.label}
-                                                </Link>
-                                            </ActionButton>
-                                        </DropdownMenuItem>
-                                    ))}
-                                </DropdownMenuGroup>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    )}
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline">Dashboard</Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56">
+                            <DropdownMenuLabel>Dashboard</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuGroup>
+                                {dashboard.map((route, i) => (
+                                    <DropdownMenuItem key={i}>
+                                        <Link
+                                            href={route.href}
+                                            className="text-sm font-medium transition-colors"
+                                        >
+                                            {route.label}
+                                        </Link>
+                                    </DropdownMenuItem>
+                                ))}
+                            </DropdownMenuGroup>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                )}
                 <div className="flex items-center sm:gap-2 md:gap-4">
                     <ShoppingCart
                         trigger={
@@ -63,9 +61,9 @@ export function Header({ routes }) {
                     <ActionButton>
                         <FavoriteBorderOutlinedIcon className="w-6 h-6" />
                     </ActionButton>
-                    
+
                     {user ?
-                        <ProfileButton /> :
+                        <ProfileButton username={user.name}/> :
                         <LoginButton />}
                 </div>
             </div>
