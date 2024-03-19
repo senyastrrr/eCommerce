@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\ShoppingCart;
 use App\Models\ShoppingCartItem;
 use Illuminate\Http\Request;
 
@@ -38,5 +39,18 @@ class ShoppingCartItemsController extends Controller
         $shoppingCartItem->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function getShoppingCartItemsByUserId($userId)
+    {
+        $cartId = ShoppingCart::where('user_id', $userId)->value('id');
+
+        if (!$cartId) {
+            return [];
+        }
+
+        $cartItems = ShoppingCartItem::where('cart_id', $cartId)->get();
+
+        return $cartItems;
     }
 }
