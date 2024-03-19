@@ -12,4 +12,14 @@ class ProductItemSize extends Model
     protected $fillable = [
         'product_id', 'size_id', 'qty',
     ];
+
+    public function size()
+    {
+        return $this->belongsTo(Size::class);
+    }
+
+    public function productItem()
+    {
+        return $this->belongsTo(ProductItem::class, 'product_id');
+    }
 }
