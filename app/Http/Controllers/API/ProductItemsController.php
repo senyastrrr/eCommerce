@@ -40,7 +40,7 @@ class ProductItemsController extends Controller
     }
 
     public function getByProductId($id){
-        $productItems = ProductItem::where('product_id', $id);
+        $productItems = ProductItem::with('color', 'sizes')->where('product_id', $id)->get();
         return response()->json($productItems, 201);
     }
 }
