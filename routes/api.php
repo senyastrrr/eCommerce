@@ -57,9 +57,12 @@ Route::get('product-items/get-by-product-id/{id}', [ProductItemsController::clas
 
 Route::apiResource('product-item-sizes', ProductItemSizesController::class);
 Route::get('product-item-sizes/get-sizes-by-product-id/{id}', [ProductItemSizesController::class, 'getProductItemSizes']);
+Route::get('product-item-sizes/get-by-product-and-size/{id}/{size}', [ProductItemSizesController::class, 'getByProductItemAndSize']);
+Route::get('product-item-sizes/{id}/details', [ProductItemSizesController::class, 'getProductItemSizeDetails']);
 
 Route::apiResource('products', ProductsController::class);
 Route::get('discounted-products', [ProductsController::class, 'getDiscountedProducts']);
+Route::get('featured-products', [ProductsController::class, 'getFeaturedProducts']);
 Route::get('products/get-product-colors/{id}', [ProductsController::class, 'getProductColors']);
 
 Route::apiResource('promotion-categories', PromotionCategoriesController::class);
@@ -72,8 +75,13 @@ Route::get('promotions/get-by-category-id/{id}', [PromotionsController::class, '
 Route::apiResource('review-comments', ReviewCommentsController::class);
 Route::apiResource('reviews', ReviewsController::class);
 Route::apiResource('roles', RolesController::class);
+
 Route::apiResource('shopping-cart-items', ShoppingCartItemsController::class);
+Route::get('user-cart-items/{id}', [ShoppingCartItemsController::class, 'getShoppingCartItemsByUserId']);
+
 Route::apiResource('shopping-carts', ShoppingCartsController::class);
+Route::get('shopping-carts/get-by-user-id/{id}', [ShoppingCartsController::class, 'getByUserId']);
+
 Route::apiResource('sizes', SizesController::class);
 
 Route::post('/images/upload', [ImageController::class, 'store']);

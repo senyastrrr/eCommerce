@@ -21,9 +21,18 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/product-details/{id}', function ($id) {
+Route::get('/blog', function () {
+    return Inertia::render('Blog', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register')
+    ]);
+});
+
+
+Route::get('/product-details/{id}/{discount}', function ($id, $discount) {
     return Inertia::render('ProductDetails', [
         'id' => $id,
+        'discount' => $discount,
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register')
     ]);
