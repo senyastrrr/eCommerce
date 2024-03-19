@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductItem;
+use App\Models\PromotionCategory;
 use App\Models\PromotionProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class ProductsController extends Controller
 {
@@ -45,9 +47,47 @@ class ProductsController extends Controller
 
     public function getDiscountedProducts()
     {
-        $discountedProducts = Product::whereIn('id', PromotionProduct::pluck('product_id'))->get();
-        return response()->json($discountedProducts);
+        $productsWithProductPromotions = Product::join('promotion_products', 'products.id', '=', 'promotion_products.product_id')
+            ->join('promotions', 'promotion_products.promotion_id', '=', 'promotions.id')
+            ->select('products.*', 'promotions.discount_rate as product_discount')
+            ->get();
+
+        $productsWithCategoryPromotions = Product::join('promotion_categories', 'products.category_id', '=', 'promotion_categories.category_id')
+            ->join('promotions', 'promotion_categories.promotion_id', '=', 'promotions.id')
+            ->select('products.*', 'promotions.discount_rate as category_discount')
+            ->get();
+
+        $allDiscountedProducts = $productsWithProductPromotions->merge($productsWithCategoryPromotions);
+
+        $uniqueDiscountedProducts = $allDiscountedProducts->unique('id');
+
+        $response = [];
+
+        foreach ($uniqueDiscountedProducts as $product) {
+            $discount_rate = $product->product_discount ?? $product->category_discount;
+            $response[] = [
+                'product' => $product,
+                'discount_rate' => $discount_rate,
+            ];
+        }
+
+        return response()->json($response);
     }
+
+    public function getFeaturedProducts()
+    {
+        $discountedProductIds = PromotionProduct::pluck('product_id')->toArray();
+
+        $discountedCategoryIds = PromotionCategory::pluck('category_id')->toArray();
+
+        $featuredProducts = Product::whereNotIn('id', $discountedProductIds)
+            ->whereNotIn('category_id', $discountedCategoryIds)
+            ->where('created_at', '>', now()->subDays(30))
+            ->get();
+
+        return response()->json($featuredProducts);
+    }
+
 
     public function getProductColors($id)
     {
