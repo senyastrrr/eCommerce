@@ -1,15 +1,12 @@
 import { Header } from "@/widgets/header"
-import { BrowserRouter } from 'react-router-dom';
-import { routes } from "@/shared/routes/dashboard-routes";
+import { home } from "@/shared/routes/home-routes";
 
 export default function Dashboard() {
 
     return (
         <>
-            <BrowserRouter>
-                <Header routes={routes} />
-                <p>Welcome to admin's page</p>
-            </BrowserRouter>
+            <Header routes={home} />
+            <p>Welcome to admin's page</p>
         </>
     );
 }

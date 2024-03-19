@@ -1,4 +1,6 @@
 import { useProductItems, ProductItemClient } from "@/entites/product-item"
+import { home } from "@/shared/routes/home-routes";
+import { Header } from "@/widgets/header";
 
 export function ProductItemsPage() {
 
@@ -13,11 +15,14 @@ export function ProductItemsPage() {
 
     if (ProductItems.isSuccess) {
         return (
-            <div className="flex-col">
-                <div className="flex-1 space-y-4 p-8 pt-6">
-                    <ProductItemClient data={ProductItems.data} />
+            <>
+                <Header routes={home} />
+                <div className="flex-col">
+                    <div className="flex-1 space-y-4 p-8 pt-6">
+                        <ProductItemClient data={ProductItems.data} />
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

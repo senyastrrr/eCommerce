@@ -1,4 +1,6 @@
 import { useSizes, SizeClient } from "@/entites/size"
+import { home } from "@/shared/routes/home-routes";
+import { Header } from "@/widgets/header";
 
 export function SizesPage() {
 
@@ -13,11 +15,14 @@ export function SizesPage() {
 
     if (Sizes.isSuccess) {
         return (
-            <div className="flex-col">
-                <div className="flex-1 space-y-4 p-8 pt-6">
-                    <SizeClient data={Sizes.data} />
+            <>
+                <Header routes={home} />
+                <div className="flex-col">
+                    <div className="flex-1 space-y-4 p-8 pt-6">
+                        <SizeClient data={Sizes.data} />
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

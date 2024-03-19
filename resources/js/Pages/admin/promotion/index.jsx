@@ -1,4 +1,6 @@
 import { usePromotions, PromotionClient } from "@/entites/promotion"
+import { home } from "@/shared/routes/home-routes";
+import { Header } from "@/widgets/header";
 
 export function PromotionsPage() {
 
@@ -13,11 +15,14 @@ export function PromotionsPage() {
 
     if (Promotions.isSuccess) {
         return (
-            <div className="flex-col">
-                <div className="flex-1 space-y-4 p-8 pt-6">
-                    <PromotionClient data={Promotions.data} />
+            <>
+                <Header routes={home} />
+                <div className="flex-col">
+                    <div className="flex-1 space-y-4 p-8 pt-6">
+                        <PromotionClient data={Promotions.data} />
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

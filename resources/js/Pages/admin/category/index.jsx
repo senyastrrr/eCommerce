@@ -1,4 +1,6 @@
 import { useCategories, CategoryClient } from "@/entites/category"
+import { home } from "@/shared/routes/home-routes";
+import { Header } from "@/widgets/header";
 
 export function CategoriesPage() {
 
@@ -13,11 +15,14 @@ export function CategoriesPage() {
 
     if (Categories.isSuccess) {
         return (
-            <div className="flex-col">
-                <div className="flex-1 space-y-4 p-8 pt-6">
-                    <CategoryClient data={Categories.data} />
+            <>
+                <Header routes={home} />
+                <div className="flex-col">
+                    <div className="flex-1 space-y-4 p-8 pt-6">
+                        <CategoryClient data={Categories.data} />
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

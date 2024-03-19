@@ -1,9 +1,11 @@
 import { useColors, ColorClient } from "@/entites/color"
+import { home } from "@/shared/routes/home-routes";
+import { Header } from "@/widgets/header";
 
 export function ColorsPage() {
 
     const Colors = useColors();
-    
+
     if (Colors.isLoading) {
         return <div>Loading...</div>;
     }
@@ -13,11 +15,14 @@ export function ColorsPage() {
 
     if (Colors.isSuccess) {
         return (
-            <div className="flex-col">
-                <div className="flex-1 space-y-4 p-8 pt-6">
-                    <ColorClient data={Colors.data} />
+            <>
+                <Header routes={home} />
+                <div className="flex-col">
+                    <div className="flex-1 space-y-4 p-8 pt-6">
+                        <ColorClient data={Colors.data} />
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }
 }
