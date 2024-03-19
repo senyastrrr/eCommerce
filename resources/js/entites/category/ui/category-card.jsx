@@ -1,7 +1,6 @@
+import { asset } from '@/shared/lib/storage-path';
 import { Card, CardContent } from '@/shared/ui/card';
 import React from 'react';
-
-const asset = (path) => `/storage/images/${path}`;
 
 export function CategoryCard({ title, description, image }) {
     return (
