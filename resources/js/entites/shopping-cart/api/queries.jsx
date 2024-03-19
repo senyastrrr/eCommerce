@@ -9,6 +9,14 @@ export function useShoppingCart(id) {
     })
 }
 
+export function useShoppingCartByUserId(id) {
+    return useQuery({
+        queryKey: [`${_queryKey}-by-user`, id],
+        queryFn: () => get(`${_root}/get-by-user-id/${id}`)
+    })
+}
+
+
 export function useShoppingCarts() {
     return useQuery({
         queryKey: [_queryKey],
