@@ -1,6 +1,6 @@
 export const home = [
-    { href: "/", label: "Home" },
-    { href: "/", label: "Shop" },
-    { href: "/", label: "Features" },
-    { href: "/", label: "Blog" },
+    { href: "/", label: "Новинки" },
+    { href: "/", label: "Магазин" },
+    { href: "/", label: "Блог" },
+    { href: "/", label: "О нас" },
 ];
